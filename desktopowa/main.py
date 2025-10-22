@@ -1,5 +1,5 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QDialog, QMainWindow, QFileDialog
+from PyQt6.QtWidgets import QApplication, QDialog, QFileDialog
 from layout import Ui_Dialog
 
 
@@ -29,7 +29,10 @@ class Okno(QDialog):
 
     def szyfruj_tekst(self):
         tekst = self.ui.txtTekst.toPlainText()
-        klucz = int(self.ui.txtKlucz.toPlainText() or 0)
+        if self.ui.txtKlucz.toPlainText() == "":
+            klucz = 0
+        else:
+            klucz = int(self.ui.txtKlucz.toPlainText())
         self.ui.lblZaszyfrowany.setText(SzyfrCezara.szyfruj(tekst, klucz))
 
     def zapisz_do_pliku(self):
